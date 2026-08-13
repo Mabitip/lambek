@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { BRAND } from "@/lib/constants/brand";
+import { getSiteUrl } from "@/lib/utils/cn";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -11,7 +12,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(getSiteUrl()),
   title: {
     default: `${BRAND.name} | Ethiopian Yirgacheffe Green Coffee Exporter`,
     template: `%s | ${BRAND.name}`,
