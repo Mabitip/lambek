@@ -1,0 +1,490 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum RoleType {
+  SUPER_ADMIN
+  ADMIN
+  EDITOR
+  SALES
+}
+
+enum PermissionType {
+  MANAGE_USERS
+  MANAGE_COFFEE
+  MANAGE_ORIGIN
+  MANAGE_JOURNAL
+  MANAGE_INQUIRIES
+  MANAGE_SAMPLES
+  MANAGE_MEDIA
+  MANAGE_SETTINGS
+}
+
+enum SampleRequestStatus {
+  PENDING
+  CONTACTED
+  APPROVED
+  SHIPPED
+  COMPLETED
+  REJECTED
+}
+
+enum InquiryType {
+  GREEN_COFFEE
+  SAMPLE
+  WHOLESALE
+  EXPORT
+  PARTNERSHIP
+  OTHER
+}
+
+enum AvailabilityStatus {
+  AVAILABLE
+  LIMITED
+  PREORDER
+  SOLD_OUT
+  UNAVAILABLE
+}
+
+enum ActivityAction {
+  CREATE
+  UPDATE
+  DELETE
+  LOGIN
+  LOGOUT
+  PUBLISH
+  UNPUBLISH
+}
+
+model User {
+  id            String     @id @default(uuid())
+  email         String     @unique
+  passwordHash  String
+  name          String
+  active        Boolean    @default(true)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  roles         UserRole[]
+  activityLogs  ActivityLog[]
+  journalPosts  JournalPost[] @relation("JournalAuthor")
+}
+
+model Role {
+  id          String           @id @default(uuid())
+  name        RoleType         @unique
+  description String?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  users       UserRole[]
+  permissions RolePermission[]
+}
+
+model Permission {
+  id          String           @id @default(uuid())
+  name        PermissionType   @unique
+  description String?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  roles       RolePermission[]
+}
+
+model UserRole {
+  id        String   @id @default(uuid())
+  userId    String
+  roleId    String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role      Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, roleId])
+  @@index([userId])
+  @@index([roleId])
+}
+
+model RolePermission {
+  id           String     @id @default(uuid())
+  roleId       String
+  permissionId String
+  createdAt    DateTime   @default(now())
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@unique([roleId, permissionId])
+  @@index([roleId])
+  @@index([permissionId])
+}
+
+model CoffeeOrigin {
+  id          String   @id @default(uuid())
+  name        String
+  slug        String   @unique
+  country     String   @default("Ethiopia")
+  region      String?
+  zone        String?
+  description String?  @db.Text
+  elevation   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  coffees     Coffee[]
+
+  @@index([slug])
+}
+
+model CoffeeProcess {
+  id          String   @id @default(uuid())
+  name        String
+  slug        String   @unique
+  description String?  @db.Text
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  coffees     Coffee[]
+
+  @@index([slug])
+}
+
+model CoffeeVariety {
+  id          String   @id @default(uuid())
+  name        String
+  slug        String   @unique
+  description String?  @db.Text
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  coffees     Coffee[]
+
+  @@index([slug])
+}
+
+model Coffee {
+  id               String         @id @default(uuid())
+  name             String
+  slug             String         @unique
+  shortDescription String?        @db.Text
+  description      String?        @db.Text
+  region           String?
+  microRegion      String?
+  country          String         @default("Ethiopia")
+  altitudeMin      Int?
+  altitudeMax      Int?
+  harvestPeriod    String?
+  cupScore         Float?
+  cupProfile       String?        @db.Text
+  tastingNotes     String[]       @default([])
+  packaging        String?
+  processingStory  String?        @db.Text
+  qualityInfo      String?        @db.Text
+  featured         Boolean        @default(false)
+  published        Boolean        @default(false)
+  seoTitle         String?
+  seoDescription   String?        @db.Text
+  originId         String?
+  processId        String?
+  varietyId        String?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  origin           CoffeeOrigin?  @relation(fields: [originId], references: [id], onDelete: SetNull)
+  process          CoffeeProcess? @relation(fields: [processId], references: [id], onDelete: SetNull)
+  variety          CoffeeVariety? @relation(fields: [varietyId], references: [id], onDelete: SetNull)
+  profile          CoffeeProfile?
+  images           CoffeeImage[]
+  lots             CoffeeLot[]
+  availability     CoffeeAvailability[]
+  documents        CoffeeDocument[]
+  sampleRequests   SampleRequest[]
+  inquiries        Inquiry[]
+
+  @@index([slug])
+  @@index([published])
+  @@index([featured])
+  @@index([originId])
+  @@index([processId])
+  @@index([varietyId])
+}
+
+model CoffeeProfile {
+  id        String   @id @default(uuid())
+  coffeeId  String   @unique
+  body      String?
+  acidity   String?
+  sweetness String?
+  aroma     String?
+  finish    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  coffee    Coffee   @relation(fields: [coffeeId], references: [id], onDelete: Cascade)
+}
+
+model Media {
+  id           String        @id @default(uuid())
+  filename     String
+  originalName String
+  mimeType     String
+  size         Int
+  width        Int?
+  height       Int?
+  altText      String?
+  url          String
+  storageKey   String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  coffeeImages CoffeeImage[]
+  journalPosts JournalPost[] @relation("JournalCover")
+  documents    CoffeeDocument[]
+
+  @@index([storageKey])
+}
+
+model CoffeeImage {
+  id        String   @id @default(uuid())
+  coffeeId  String
+  mediaId   String
+  sortOrder Int      @default(0)
+  isPrimary Boolean  @default(false)
+  createdAt DateTime @default(now())
+  coffee    Coffee   @relation(fields: [coffeeId], references: [id], onDelete: Cascade)
+  media     Media    @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+
+  @@index([coffeeId])
+  @@index([mediaId])
+}
+
+model CoffeeLot {
+  id          String          @id @default(uuid())
+  lotId       String          @unique
+  coffeeId    String
+  harvest     String?
+  quantity    String?
+  cupProfile  String?         @db.Text
+  notes       String?         @db.Text
+  published   Boolean         @default(true)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  coffee      Coffee          @relation(fields: [coffeeId], references: [id], onDelete: Cascade)
+  sampleRequests SampleRequest[]
+
+  @@index([lotId])
+  @@index([coffeeId])
+}
+
+model CoffeeAvailability {
+  id        String             @id @default(uuid())
+  coffeeId  String
+  status    AvailabilityStatus @default(AVAILABLE)
+  notes     String?
+  validFrom DateTime           @default(now())
+  validTo   DateTime?
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+  coffee    Coffee             @relation(fields: [coffeeId], references: [id], onDelete: Cascade)
+
+  @@index([coffeeId])
+  @@index([status])
+}
+
+model CoffeeDocument {
+  id        String   @id @default(uuid())
+  coffeeId  String
+  mediaId   String
+  title     String
+  docType   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  coffee    Coffee   @relation(fields: [coffeeId], references: [id], onDelete: Cascade)
+  media     Media    @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+
+  @@index([coffeeId])
+}
+
+model Inquiry {
+  id                String      @id @default(uuid())
+  fullName          String
+  company           String?
+  email             String
+  phone             String?
+  country           String?
+  interestedCoffee  String?
+  coffeeId          String?
+  preferredProcess  String?
+  estimatedQuantity String?
+  requestType       InquiryType @default(GREEN_COFFEE)
+  message           String?     @db.Text
+  read              Boolean     @default(false)
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  coffee            Coffee?     @relation(fields: [coffeeId], references: [id], onDelete: SetNull)
+
+  @@index([email])
+  @@index([createdAt])
+  @@index([read])
+}
+
+model SampleRequest {
+  id        String              @id @default(uuid())
+  coffeeId  String?
+  lotId     String?
+  company   String
+  name      String
+  email     String
+  country   String?
+  quantity  String?
+  message   String?             @db.Text
+  status    SampleRequestStatus @default(PENDING)
+  adminNotes String?            @db.Text
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+  coffee    Coffee?             @relation(fields: [coffeeId], references: [id], onDelete: SetNull)
+  lot       CoffeeLot?          @relation(fields: [lotId], references: [id], onDelete: SetNull)
+
+  @@index([email])
+  @@index([status])
+  @@index([createdAt])
+  @@index([coffeeId])
+}
+
+model ContactMessage {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  subject   String?
+  message   String   @db.Text
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([createdAt])
+  @@index([read])
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+}
+
+model JournalCategory {
+  id          String        @id @default(uuid())
+  name        String
+  slug        String        @unique
+  description String?       @db.Text
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  posts       JournalPost[]
+
+  @@index([slug])
+}
+
+model JournalTag {
+  id        String           @id @default(uuid())
+  name      String
+  slug      String           @unique
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  posts     JournalPostTag[]
+
+  @@index([slug])
+}
+
+model JournalPost {
+  id              String           @id @default(uuid())
+  title           String
+  slug            String           @unique
+  excerpt         String?          @db.Text
+  content         String           @db.Text
+  coverImageId    String?
+  authorId        String?
+  categoryId      String?
+  featured        Boolean          @default(false)
+  published       Boolean          @default(false)
+  publishedAt     DateTime?
+  scheduledAt     DateTime?
+  readingTime     Int?
+  seoTitle        String?
+  seoDescription  String?          @db.Text
+  ogImageUrl      String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  author          User?            @relation("JournalAuthor", fields: [authorId], references: [id], onDelete: SetNull)
+  category        JournalCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  coverImage      Media?           @relation("JournalCover", fields: [coverImageId], references: [id], onDelete: SetNull)
+  tags            JournalPostTag[]
+
+  @@index([slug])
+  @@index([published])
+  @@index([featured])
+  @@index([publishedAt])
+  @@index([categoryId])
+}
+
+model JournalPostTag {
+  id        String      @id @default(uuid())
+  postId    String
+  tagId     String
+  createdAt DateTime    @default(now())
+  post      JournalPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  tag       JournalTag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, tagId])
+  @@index([postId])
+  @@index([tagId])
+}
+
+model Testimonial {
+  id        String   @id @default(uuid())
+  name      String
+  role      String?
+  company   String?
+  content   String   @db.Text
+  featured  Boolean  @default(false)
+  sortOrder Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([featured])
+}
+
+model Partner {
+  id        String   @id @default(uuid())
+  name      String
+  logoUrl   String?
+  website   String?
+  sortOrder Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SiteSetting {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  value     String   @db.Text
+  group     String   @default("general")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([group])
+  @@index([key])
+}
+
+model ActivityLog {
+  id         String         @id @default(uuid())
+  userId     String?
+  action     ActivityAction
+  entityType String?
+  entityId   String?
+  details    String?        @db.Text
+  ipAddress  String?
+  createdAt  DateTime       @default(now())
+  user       User?          @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([createdAt])
+  @@index([entityType, entityId])
+}
