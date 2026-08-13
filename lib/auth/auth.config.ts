@@ -1,9 +1,7 @@
 import type { NextAuthConfig } from "next-auth";
-import Credentials from "next-auth/providers/credentials";
-import bcrypt from "bcryptjs";
-import { prisma } from "@/lib/db/prisma";
 import type { PermissionName } from "@/lib/constants/brand";
-import type { PermissionType } from "@prisma/client";
+
+export type AppPermission = string;
 
 declare module "next-auth" {
   interface User {
@@ -11,7 +9,7 @@ declare module "next-auth" {
     email: string;
     name: string;
     roles: string[];
-    permissions: PermissionType[];
+    permissions: AppPermission[];
   }
 
   interface Session {
@@ -23,11 +21,14 @@ declare module "@auth/core/jwt" {
   interface JWT {
     id: string;
     roles: string[];
-    permissions: PermissionType[];
+    permissions: AppPermission[];
   }
 }
 
+/** Edge-compatible Auth.js config (no Prisma / bcrypt / Node modules). */
 export const authConfig: NextAuthConfig = {
+  secret: process.env.AUTH_SECRET,
+  trustHost: true,
   pages: {
     signIn: "/admin/login",
   },
@@ -35,60 +36,7 @@ export const authConfig: NextAuthConfig = {
     strategy: "jwt",
     maxAge: 60 * 60 * 8,
   },
-  providers: [
-    Credentials({
-      name: "credentials",
-      credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) return null;
-
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email as string },
-          include: {
-            roles: {
-              include: {
-                role: {
-                  include: {
-                    permissions: {
-                      include: { permission: true },
-                    },
-                  },
-                },
-              },
-            },
-          },
-        });
-
-        if (!user || !user.active) return null;
-
-        const valid = await bcrypt.compare(
-          credentials.password as string,
-          user.passwordHash,
-        );
-        if (!valid) return null;
-
-        const roles = user.roles.map((ur) => ur.role.name);
-        const permissions = [
-          ...new Set(
-            user.roles.flatMap((ur) =>
-              ur.role.permissions.map((rp) => rp.permission.name),
-            ),
-          ),
-        ];
-
-        return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          roles,
-          permissions,
-        };
-      },
-    }),
-  ],
+  providers: [],
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
@@ -102,7 +50,7 @@ export const authConfig: NextAuthConfig = {
       if (session.user) {
         session.user.id = token.id as string;
         session.user.roles = (token.roles as string[]) ?? [];
-        session.user.permissions = (token.permissions as PermissionType[]) ?? [];
+        session.user.permissions = (token.permissions as AppPermission[]) ?? [];
       }
       return session;
     },
@@ -110,10 +58,10 @@ export const authConfig: NextAuthConfig = {
 };
 
 export function hasPermission(
-  permissions: PermissionType[] | undefined,
+  permissions: AppPermission[] | undefined,
   required: PermissionName,
 ): boolean {
-  return permissions?.includes(required as PermissionType) ?? false;
+  return permissions?.includes(required) ?? false;
 }
 
 export function hasAnyRole(roles: string[] | undefined, required: string[]): boolean {

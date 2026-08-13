@@ -2,7 +2,6 @@ import { auth } from "@/lib/auth";
 import { hasPermission } from "@/lib/auth/auth.config";
 import type { PermissionName } from "@/lib/constants/brand";
 import { redirect } from "next/navigation";
-import type { PermissionType } from "@prisma/client";
 
 export async function requireAuth() {
   const session = await auth();
@@ -14,7 +13,7 @@ export async function requireAuth() {
 
 export async function requirePermission(permission: PermissionName) {
   const session = await requireAuth();
-  if (!hasPermission(session.user.permissions as PermissionType[], permission)) {
+  if (!hasPermission(session.user.permissions, permission)) {
     redirect("/admin/dashboard");
   }
   return session;
