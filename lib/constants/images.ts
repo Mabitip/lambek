@@ -28,11 +28,50 @@ export type SiteImageKey = keyof typeof SITE_IMAGES;
 
 /** Homepage hero carousel slides */
 export const HERO_SLIDES = [
-  { src: SITE_IMAGES.hero, alt: "Ethiopian coffee highlands", tag: "Highland Terroir · 2,200 MASL", title: "Ethiopian Highlands" },
-  { src: SITE_IMAGES.origin, alt: "Gedeo highland landscape", tag: "Gedeo Zone · Yirgacheffe", title: "Cradle of Arabica" },
-  { src: SITE_IMAGES.farm, alt: "Coffee farm in the Gedeo zone", tag: "Smallholder Agroforestry", title: "Shade-Grown Heritage" },
-  { src: SITE_IMAGES.processing, alt: "Ripe coffee cherries on branch", tag: "Selective Hand Picking", title: "Peak Cherry Ripeness" },
-  { src: SITE_IMAGES.drying, alt: "Coffee drying on raised beds", tag: "Raised-Bed Sun Drying", title: "Artisanal Curing" },
+  {
+    type: "video" as const,
+    videoSrc: "/videos/hero-lambek.mp4",
+    src: SITE_IMAGES.hero,
+    poster: SITE_IMAGES.hero,
+    alt: "Lambek Coffee origin video",
+    tag: "Origin Film · Lambek Coffee",
+    title: "The Ethiopian Origin",
+  },
+  {
+    type: "image" as const,
+    src: SITE_IMAGES.hero,
+    alt: "Ethiopian coffee highlands",
+    tag: "Highland Terroir · 2,200 MASL",
+    title: "Ethiopian Highlands",
+  },
+  {
+    type: "image" as const,
+    src: SITE_IMAGES.origin,
+    alt: "Gedeo highland landscape",
+    tag: "Gedeo Zone · Yirgacheffe",
+    title: "Cradle of Arabica",
+  },
+  {
+    type: "image" as const,
+    src: SITE_IMAGES.farm,
+    alt: "Coffee farm in the Gedeo zone",
+    tag: "Smallholder Agroforestry",
+    title: "Shade-Grown Heritage",
+  },
+  {
+    type: "image" as const,
+    src: SITE_IMAGES.processing,
+    alt: "Ripe coffee cherries on branch",
+    tag: "Selective Hand Picking",
+    title: "Peak Cherry Ripeness",
+  },
+  {
+    type: "image" as const,
+    src: SITE_IMAGES.drying,
+    alt: "Coffee drying on raised beds",
+    tag: "Raised-Bed Sun Drying",
+    title: "Artisanal Curing",
+  },
 ] as const;
 
 /** Gallery page images with categories */

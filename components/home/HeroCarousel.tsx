@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
-import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight, Sparkles } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { ChevronDown, ChevronLeft, ChevronRight, ArrowRight, Sparkles, Volume2, VolumeX } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { OptimizedImage } from "@/components/ui/OptimizedImage";
 import { cn } from "@/lib/utils/cn";
@@ -12,6 +12,9 @@ export type HeroSlide = {
   alt: string;
   tag?: string;
   title?: string;
+  type?: "video" | "image";
+  videoSrc?: string;
+  poster?: string;
 };
 
 interface HeroCarouselProps {
@@ -25,10 +28,12 @@ export function HeroCarousel({
   slides,
   headline,
   subtext,
-  autoPlayInterval = 5500,
+  autoPlayInterval = 6500,
 }: HeroCarouselProps) {
   const reduced = useReducedMotion();
   const [active, setActive] = useState(0);
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const slideCount = slides.length;
 
   const goTo = useCallback(
@@ -53,6 +58,18 @@ export function HeroCarousel({
     return () => clearInterval(timer);
   }, [reduced, slideCount, autoPlayInterval, active]);
 
+  // Handle video play on active slide
+  useEffect(() => {
+    if (videoRef.current) {
+      if (slides[active]?.type === "video") {
+        videoRef.current.currentTime = 0;
+        videoRef.current.play().catch(() => {});
+      } else {
+        videoRef.current.pause();
+      }
+    }
+  }, [active, slides]);
+
   const currentSlide = slides[active];
   const headlineLines = headline.split("\n");
 
@@ -60,48 +77,67 @@ export function HeroCarousel({
     <section
       className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black"
       aria-roledescription="carousel"
-      aria-label="Hero slideshow"
+      aria-label="Hero slideshow and video"
     >
-      {/* Background Slides with Ken Burns Effect */}
+      {/* Background Media (Video / Images) with Smooth Transitions */}
       <div className="absolute inset-0" aria-live="polite">
-        {slides.map((slide, index) => (
-          <motion.div
-            key={slide.src}
-            initial={false}
-            animate={{
-              opacity: index === active ? 1 : 0,
-              scale: index === active ? 1.05 : 1,
-            }}
-            transition={{
-              opacity: { duration: reduced ? 0 : 1.2, ease: "easeInOut" },
-              scale: { duration: autoPlayInterval / 1000 + 1, ease: "linear" },
-            }}
-            className="absolute inset-0"
-            aria-hidden={index !== active}
-          >
-            <OptimizedImage
-              src={slide.src}
-              alt={slide.alt}
-              fill
-              priority={index === 0}
-              sizes="100vw"
-              variant="hero"
-              className="object-cover"
-            />
-          </motion.div>
-        ))}
+        {slides.map((slide, index) => {
+          const isActive = index === active;
+          const isVideo = slide.type === "video" && slide.videoSrc;
+
+          return (
+            <motion.div
+              key={slide.videoSrc ?? slide.src}
+              initial={false}
+              animate={{
+                opacity: isActive ? 1 : 0,
+                scale: isActive ? 1.04 : 1,
+              }}
+              transition={{
+                opacity: { duration: reduced ? 0 : 1.2, ease: "easeInOut" },
+                scale: { duration: autoPlayInterval / 1000 + 1.5, ease: "linear" },
+              }}
+              className="absolute inset-0"
+              aria-hidden={!isActive}
+            >
+              {isVideo ? (
+                <video
+                  ref={index === 0 ? videoRef : undefined}
+                  src={slide.videoSrc}
+                  poster={slide.poster ?? slide.src}
+                  autoPlay
+                  muted={isMuted}
+                  loop
+                  playsInline
+                  preload="auto"
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <OptimizedImage
+                  src={slide.src}
+                  alt={slide.alt}
+                  fill
+                  priority={index <= 1}
+                  sizes="100vw"
+                  variant="hero"
+                  className="object-cover"
+                />
+              )}
+            </motion.div>
+          );
+        })}
       </div>
 
-      {/* Luxury Gradient Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/30" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_40%,rgba(201,169,97,0.15),transparent_60%)]" />
+      {/* Cinematic Gradient Overlays */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-black/30" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-transparent" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_40%,rgba(201,169,97,0.18),transparent_65%)]" />
 
       {/* Main Content Area */}
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-24 pb-32 text-left text-white sm:px-8 lg:px-12">
         <div className="max-w-3xl">
           {/* Active Slide Tag Pill */}
-          <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-secondary/40 bg-black/50 px-4 py-1.5 backdrop-blur-md">
+          <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-secondary/40 bg-black/55 px-4 py-1.5 backdrop-blur-md">
             <span className="h-2 w-2 animate-pulse rounded-full bg-secondary" />
             <span className="text-xs font-semibold uppercase tracking-[0.25em] text-secondary">
               {currentSlide?.tag ?? "Gedeo Zone · Ethiopia"}
@@ -146,6 +182,18 @@ export function HeroCarousel({
             >
               Request a Sample
             </Link>
+
+            {/* Mute/Unmute toggle for video slide */}
+            {currentSlide?.type === "video" && (
+              <button
+                type="button"
+                onClick={() => setIsMuted((m) => !m)}
+                aria-label={isMuted ? "Unmute video" : "Mute video"}
+                className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/30 bg-black/40 text-white backdrop-blur-md transition hover:border-secondary hover:bg-black/60"
+              >
+                {isMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5 text-secondary" />}
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -177,7 +225,7 @@ export function HeroCarousel({
         <div className="flex items-center gap-3">
           {slides.map((slide, index) => (
             <button
-              key={slide.src}
+              key={slide.videoSrc ?? slide.src}
               type="button"
               onClick={() => goTo(index)}
               aria-label={`Go to slide ${index + 1}: ${slide.alt}`}
@@ -204,7 +252,7 @@ export function HeroCarousel({
                   index === active ? "text-secondary" : "text-white/40 group-hover:text-white/70",
                 )}
               >
-                0{index + 1}
+                {slide.type === "video" ? "Film" : `0${index + 1}`}
               </span>
             </button>
           ))}
