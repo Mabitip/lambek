@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { LayoutGrid, X } from "lucide-react";
 import { NAV_LINKS, MOBILE_MORE_LINKS, BRAND } from "@/lib/constants/brand";
+import { SITE_IMAGES } from "@/lib/constants/images";
+import { OptimizedImage } from "@/components/ui/OptimizedImage";
 import { cn } from "@/lib/utils/cn";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
@@ -42,15 +44,36 @@ export function Navbar() {
     <>
       <header className="site-header">
         <div className={cn("site-header-bar", barState)}>
-          <Link
-            href="/"
-            className={cn(
-              "site-logo",
-              showTransparent ? "text-white" : "text-primary",
+          <Link href="/" className="site-logo flex items-center"> 
+            {showTransparent ? (
+              <OptimizedImage
+                src={SITE_IMAGES.logoWhite}
+                alt={BRAND.name}
+                width={170}
+                height={50}
+                className="h-10 w-auto object-contain"
+                priority
+              />
+            ) : (
+              <>
+                <OptimizedImage
+                  src={SITE_IMAGES.logoDarkGreen}
+                  alt={BRAND.name}
+                  width={170}
+                  height={50}
+                  className="logo-on-light h-10 w-auto object-contain"
+                  priority
+                />
+                <OptimizedImage
+                  src={SITE_IMAGES.logoWhite}
+                  alt={BRAND.name}
+                  width={170}
+                  height={50}
+                  className="logo-on-dark h-10 w-auto object-contain"
+                  priority
+                />
+              </>
             )}
-          >
-            <span className="site-logo-mark">{BRAND.wordmark}</span>
-            <span className="site-logo-accent">Coffee</span>
           </Link>
 
           <nav className="site-nav" aria-label="Primary">
@@ -97,11 +120,21 @@ export function Navbar() {
           />
           <div className="fixed inset-y-0 right-0 z-[120] flex w-[min(100%,20rem)] flex-col rounded-l-3xl border-l border-border bg-card/95 shadow-2xl backdrop-blur-xl lg:hidden">
             <div className="flex items-center justify-between px-6 py-6">
-              <div>
-                <p className="font-sans text-sm font-medium uppercase tracking-[0.2em] text-foreground/50">
-                  More
-                </p>
-                <p className="mt-1 text-lg font-semibold text-primary">{BRAND.name}</p>
+              <div className="flex items-center gap-2">
+                <OptimizedImage
+                  src={SITE_IMAGES.logoDarkGreen}
+                  alt={BRAND.name}
+                  width={130}
+                  height={38}
+                  className="logo-on-light h-8 w-auto object-contain"
+                />
+                <OptimizedImage
+                  src={SITE_IMAGES.logoWhite}
+                  alt={BRAND.name}
+                  width={130}
+                  height={38}
+                  className="logo-on-dark h-8 w-auto object-contain"
+                />
               </div>
               <button
                 type="button"

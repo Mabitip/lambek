@@ -60,7 +60,7 @@ export const settingsService = {
       return await settingsRepository.getAll();
     } catch (error) {
       if (process.env.NODE_ENV === "development") {
-        console.warn("[settingsService.getAll] Database unavailable, using empty settings.", error);
+        console.warn("[settingsService.getAll] Database unavailable (ECONNREFUSED) — using default brand settings.");
       }
       return {};
     }
@@ -78,9 +78,9 @@ export const settingsService = {
     try {
       const settings = await settingsRepository.getAll();
       return resolveContactInfo(settings);
-    } catch (error) {
+    } catch {
       if (process.env.NODE_ENV === "development") {
-        console.warn("[settingsService.getContactInfo] Database unavailable, using defaults.", error);
+        console.warn("[settingsService.getContactInfo] Database unavailable — using default contact info.");
       }
       return resolveContactInfo({});
     }

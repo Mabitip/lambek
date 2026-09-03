@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { FOOTER_NAV_LINKS, BRAND } from "@/lib/constants/brand";
+import { SITE_IMAGES } from "@/lib/constants/images";
+import { OptimizedImage } from "@/components/ui/OptimizedImage";
 import { resolveContactInfo } from "@/lib/constants/contact";
 import { ContactDetails } from "@/components/layout/ContactDetails";
 import { FooterThemeToggle } from "@/components/layout/FooterThemeToggle";
@@ -37,8 +39,14 @@ export function Footer({ settings = {} }: FooterProps) {
       <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-5">
-            <Link href="/" className="inline-block text-3xl font-semibold tracking-[0.2em]">
-              {BRAND.wordmark}
+            <Link href="/" className="inline-block">
+              <OptimizedImage
+                src={SITE_IMAGES.logoGold}
+                alt={BRAND.name}
+                width={190}
+                height={56}
+                className="h-12 w-auto object-contain"
+              />
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-[var(--footer-muted)]">
               {tagline}

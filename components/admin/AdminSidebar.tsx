@@ -15,6 +15,8 @@ import {
 } from "lucide-react";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { BRAND } from "@/lib/constants/brand";
+import { SITE_IMAGES } from "@/lib/constants/images";
+import { OptimizedImage } from "@/components/ui/OptimizedImage";
 
 const links = [
   { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -33,8 +35,24 @@ export function AdminSidebar() {
   return (
     <aside className="flex w-64 flex-col border-r border-border bg-card">
       <div className="border-b border-border p-6">
-        <Link href="/admin/dashboard" className="font-serif text-xl tracking-wider text-primary">
-          {BRAND.wordmark} Admin
+        <Link href="/admin/dashboard" className="flex items-center justify-between gap-2">
+          <OptimizedImage
+            src={SITE_IMAGES.logoDarkGreen}
+            alt={BRAND.name}
+            width={130}
+            height={38}
+            className="logo-on-light h-8 w-auto object-contain"
+          />
+          <OptimizedImage
+            src={SITE_IMAGES.logoWhite}
+            alt={BRAND.name}
+            width={130}
+            height={38}
+            className="logo-on-dark h-8 w-auto object-contain"
+          />
+          <span className="rounded-md border border-primary/20 bg-primary/10 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
+            Admin
+          </span>
         </Link>
       </div>
       <nav className="flex-1 space-y-1 p-4">
