@@ -19,6 +19,14 @@ export const metadata: Metadata = {
   },
   description:
     `${BRAND.legalName} — processor and exporter of high quality, traceable Ethiopian Yirgacheffe green coffee from the Gedeo highlands.`,
+  icons: {
+    icon: [
+      { url: "/icon.png", type: "image/png" },
+      { url: "/favicon.ico" },
+    ],
+    shortcut: "/icon.png",
+    apple: "/apple-icon.png",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

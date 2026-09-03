@@ -22,6 +22,10 @@ export const SITE_IMAGES = {
   logoNameGold: "/logos/logo-name-gold.png",
   logoNameWhite: "/logos/logo-name-white.png",
   logoNameDarkGreen: "/logos/logo-name-darkgreen.png",
+  emblem: "/logos/emblem-darkgreen.png",
+  emblemDarkGreen: "/logos/emblem-darkgreen.png",
+  emblemGold: "/logos/emblem-gold.png",
+  emblemWhite: "/logos/emblem-white.png",
 } as const;
 
 export type SiteImageKey = keyof typeof SITE_IMAGES;
