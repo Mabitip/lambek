@@ -28,19 +28,13 @@ export const metadata = buildMetadata({
   path: "/about",
 });
 
-const DEFAULT_ABOUT = `Konga Trading PLC is an Ethiopian specialty coffee company and exporter focused exclusively on coffees from the Yirgacheffe region. Headquartered in Addis Ababa, Konga's primary production site is in the Konga micro-region where the company operates a wet mill and a dedicated special-natural preparation facility. Konga connects specialty coffee directly from farmers with high-end roasters around the world, built on traceability, rigorous quality control, and close producer relationships.
+const DEFAULT_ABOUT = `Lambek Coffee Ltd is a specialty coffee processor and exporter dedicated exclusively to the finest green coffees from the Yirgacheffe and Gedeo highlands of Ethiopia. Headquartered in Addis Ababa with direct washing and drying facilities across Gedeo, Lambek Coffee connects smallholder farming families directly with discerning specialty roasteries around the world. Our operations are rooted in radical lot traceability, strict cherry selection, pure spring water processing, and close producer partnerships.
 
-Konga was founded and is managed by Takele Mamo, who spent 12 years as General Manager of the Yirgacheffe Coffee Farmers Cooperative Union (YCFCU). That background created deep relationships with growers and allows Konga to offer single-farm coffees rather than only regionally blended lots. Independent importer documentation describes Konga as managing and exporting individually named farmer lots.
+Lambek Coffee is managed by experienced leaders with over a decade of high-end specialty coffee stewardship, including former senior leadership within the Yirgacheffe Coffee Farmers Cooperative Union (YCFCU). This deep origin connection allows Lambek Coffee to cultivate direct relationships with growers, paying quality premiums and offering traceable single-farm and micro-station lots.
 
-Konga operates a controlled value chain from farmers and cherry sourcing through wet-mill processing, raised-bed drying, professional dry-milling in Addis Ababa, quality control, and export to specialty roasters. The company prioritizes sourcing differentiated coffees, building micro-lot traceability, using processing as a value-creation tool, and maintaining professional dry-milling and sorting standards for export.
+We manage a meticulously controlled value chain: from selective hand-picking of deep crimson cherries and wet-mill processing to elevated African raised-bed sun drying, professional dry-milling, optical color grading in Addis Ababa, and hermetic export packaging in GrainPro liners.
 
-Product categories include Yirgacheffe Fully Washed (floral, citrus, tea-like), Yirgacheffe Natural (fruit-forward, sweet, complex), Single-Farm Lots (high traceability, individual producer story), and Special Natural / Micro-lots (small-batch, differentiated offerings).
-
-Quality control is applied at every transition point (cherry sourcing, wet mill / natural station, drying, resting/storage, dry mill, cupping, and pre-shipment) and is enforced through documented protocols, moisture monitoring, defect removal, and sensory evaluation. Single-farm traceability is a key differentiator: Konga records producer name, exact location, elevation, variety, harvest period, process type, processing site, drying protocol, physical quality, cup score, and lot code.
-
-Public records show Konga-associated exports to markets including the United States, Japan, and Belgium, with documented buyers such as Royal Coffee. Strategic priorities include deepening structured farmer partnerships with quality incentives, expanding farm-level traceability, standardizing SOPs for processed lots, strengthening QC lab practices, building an annual micro-lot catalogue, and prioritizing repeat roaster/importer relationships.
-
-Konga Trading PLC occupies a distinctive position in Ethiopia's specialty coffee ecosystem as a Yirgacheffe-focused exporter connecting farmers and distinctive lots with international specialty buyers. Company management should verify current facilities, certifications, buyers, export volumes, and financial details before external use.`;
+Our core offerings include Yirgacheffe Grade 1 Fully Washed (celebrated for jasmine florals, bergamot, and sparkling citrus clarity), Yirgacheffe Grade 1 Special Natural (intense wild blueberries, raw honey, and sweet stonefruit), Single-Farm Micro-lots, and custom prepared export lots tailored for specialty importers and roasters globally.`;
 
 const KEY_STATS = [
   {

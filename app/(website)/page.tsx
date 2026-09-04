@@ -60,7 +60,7 @@ const FEATURES = [
 export default async function HomePage() {
   const [hero, featuredCoffees, settings] = await Promise.all([
     settingsService.getHeroContent().catch(() => ({
-      headline: "FROM THE HIGHLANDS\nOF YIRGACHEFFE",
+      headline: "WHERE TRADITIONS\nMEET AROMA",
       subtext: "Exceptional Ethiopian coffee, carefully processed and prepared for the world.",
     })),
     coffeeService.getFeatured(6).catch(() => []),
@@ -303,44 +303,80 @@ export default async function HomePage() {
 
           <div className="mt-16 grid gap-8 lg:grid-cols-2">
             {/* Washed Card */}
-            <div className="group overflow-hidden rounded-3xl border border-border bg-background p-8 shadow-sm transition hover:shadow-xl">
-              <div className="flex items-center justify-between">
-                <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary">
-                  Fully Washed
-                </span>
-                <span className="text-xs text-foreground/50">12–15 Days Raised Beds</span>
-              </div>
-              <h3 className="mt-5 font-serif text-2xl font-semibold text-primary">Floral, Citrus & Tea-Like Elegance</h3>
-              <p className="mt-3 text-sm leading-relaxed text-foreground/70">
-                Pulping with fresh spring water followed by controlled fermentation yields pristine clarity, jasmine florals, bergamot, and sweet lemon acidity.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-2">
-                {["Jasmine", "Bergamot", "Peach", "Black Tea", "Sparkling Acidity"].map((note) => (
-                  <span key={note} className="rounded-md border border-border bg-card px-2.5 py-1 text-xs font-medium text-foreground/80">
-                    {note}
+            <div className="group overflow-hidden rounded-3xl border border-border bg-card shadow-sm transition duration-300 hover:shadow-xl">
+              <div className="relative aspect-[16/10] overflow-hidden">
+                <OptimizedImage
+                  src={SITE_IMAGES.washedStation}
+                  alt="Ethiopian washed coffee station with spring water channels"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute top-4 left-4">
+                  <span className="rounded-full bg-[#143525] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-md border border-white/20">
+                    Fully Washed
                   </span>
-                ))}
+                </div>
+                <div className="absolute bottom-4 left-4 right-4">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-secondary">Mountain Spring Water · Fermentation</p>
+                </div>
+              </div>
+              <div className="p-8">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-primary">Wet Processing</span>
+                  <span className="text-xs text-foreground/50">12–15 Days Raised Beds</span>
+                </div>
+                <h3 className="mt-4 font-serif text-2xl font-semibold text-primary">Floral, Citrus & Tea-Like Elegance</h3>
+                <p className="mt-3 text-sm leading-relaxed text-foreground/70">
+                  Pulping with pure mountain spring water followed by controlled wet fermentation yields pristine cup clarity, jasmine florals, bergamot, and delicate lemon acidity.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {["Jasmine", "Bergamot", "Peach", "Black Tea", "Sparkling Acidity"].map((note) => (
+                    <span key={note} className="rounded-md border border-border bg-background px-2.5 py-1 text-xs font-medium text-foreground/80">
+                      {note}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
 
             {/* Natural Card */}
-            <div className="group overflow-hidden rounded-3xl border border-border bg-background p-8 shadow-sm transition hover:shadow-xl">
-              <div className="flex items-center justify-between">
-                <span className="rounded-full bg-secondary/20 px-3 py-1 text-xs font-bold uppercase tracking-wider text-secondary">
-                  Special Natural
-                </span>
-                <span className="text-xs text-foreground/50">21–25 Days Sun-Drying</span>
-              </div>
-              <h3 className="mt-5 font-serif text-2xl font-semibold text-primary">Wild Blueberry, Honey & Sweet Stonefruit</h3>
-              <p className="mt-3 text-sm leading-relaxed text-foreground/70">
-                Single-layer sun-drying on elevated African beds develops intense fruit sugars, silky mouthfeel, and deep blueberry-honey richness.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-2">
-                {["Wild Blueberry", "Ripe Strawberry", "Raw Honey", "Milk Chocolate", "Silky Body"].map((note) => (
-                  <span key={note} className="rounded-md border border-border bg-card px-2.5 py-1 text-xs font-medium text-foreground/80">
-                    {note}
+            <div className="group overflow-hidden rounded-3xl border border-border bg-card shadow-sm transition duration-300 hover:shadow-xl">
+              <div className="relative aspect-[16/10] overflow-hidden">
+                <OptimizedImage
+                  src={SITE_IMAGES.drying}
+                  alt="Elevated African coffee drying beds under Ethiopian sunshine"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute top-4 left-4">
+                  <span className="rounded-full bg-secondary px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-secondary-foreground shadow-md">
+                    Special Natural
                   </span>
-                ))}
+                </div>
+                <div className="absolute bottom-4 left-4 right-4">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-secondary">Sun-Cured · African Raised Beds</p>
+                </div>
+              </div>
+              <div className="p-8">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-secondary">Natural Sun Drying</span>
+                  <span className="text-xs text-foreground/50">21–25 Days Sun-Drying</span>
+                </div>
+                <h3 className="mt-4 font-serif text-2xl font-semibold text-primary">Wild Blueberry, Honey & Sweet Stonefruit</h3>
+                <p className="mt-3 text-sm leading-relaxed text-foreground/70">
+                  Single-layer sun-drying of intact ripe cherries on elevated African beds develops intense natural sugars, silky mouthfeel, and deep fruit complexity.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {["Wild Blueberry", "Ripe Strawberry", "Raw Honey", "Milk Chocolate", "Silky Body"].map((note) => (
+                    <span key={note} className="rounded-md border border-border bg-background px-2.5 py-1 text-xs font-medium text-foreground/80">
+                      {note}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

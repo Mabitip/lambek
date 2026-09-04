@@ -137,10 +137,9 @@ export function HeroCarousel({
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-24 pb-32 text-left text-white sm:px-8 lg:px-12">
         <div className="max-w-3xl">
           {/* Active Slide Tag Pill */}
-          <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-secondary/40 bg-black/55 px-4 py-1.5 backdrop-blur-md">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-secondary" />
-            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-secondary">
-              {currentSlide?.tag ?? "Gedeo Zone · Ethiopia"}
+          <div className="mb-6 flex items-center gap-2.5">
+            <span className="rounded-md border border-secondary/50 bg-[#0B1E15]/80 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-secondary backdrop-blur-sm">
+              {currentSlide?.tag ?? "Specialty Green Coffee · Yirgacheffe"}
             </span>
           </div>
 
@@ -161,7 +160,7 @@ export function HeroCarousel({
               animate={{ opacity: 1, y: 0 }}
               exit={reduced ? undefined : { opacity: 0, y: -10 }}
               transition={{ duration: 0.4 }}
-              className="mt-6 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg"
+              className="mt-6 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg"
             >
               {subtext}
             </motion.p>
@@ -173,14 +172,14 @@ export function HeroCarousel({
               href="/coffee"
               className="group inline-flex h-12 items-center gap-2 rounded-full bg-secondary px-8 text-sm font-semibold uppercase tracking-wider text-secondary-foreground transition hover:bg-secondary/90 hover:shadow-lg"
             >
-              Explore Coffees
+              Explore Green Coffees
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
               href="/contact"
-              className="inline-flex h-12 items-center gap-2 rounded-full border border-white/30 bg-white/10 px-8 text-sm font-semibold uppercase tracking-wider text-white backdrop-blur-md transition hover:bg-white/20"
+              className="inline-flex h-12 items-center gap-2 rounded-full border border-white/40 bg-[#143525]/80 px-8 text-sm font-semibold uppercase tracking-wider text-white backdrop-blur-md transition hover:bg-[#143525] hover:border-secondary"
             >
-              Request a Sample
+              Request Green Sample
             </Link>
 
             {/* Mute/Unmute toggle for video slide */}

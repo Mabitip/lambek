@@ -1,7 +1,7 @@
 import { requirePermission } from "@/lib/auth/session";
 import { journalService } from "@/lib/services/content.service";
 import { JournalForm } from "@/components/admin/JournalForm";
-import { createJournalAction } from "@/lib/actions/admin.actions";
+import { createJournalAction } from "@/lib/actions/journal.actions";
 
 export default async function NewJournalPage() {
   await requirePermission("MANAGE_JOURNAL");

@@ -146,12 +146,12 @@ async function main() {
     { key: "company_name", value: "Lambek Coffee Ltd", group: "general" },
     {
       key: "tagline",
-      value: "Ethiopian Origin. Distinctive Coffee. Global Connection.",
+      value: "Where Traditions Meet Aroma",
       group: "general",
     },
     {
       key: "hero_headline",
-      value: "FROM THE HIGHLANDS\nOF YIRGACHEFFE",
+      value: "WHERE TRADITIONS\nMEET AROMA",
       group: "hero",
     },
     {

@@ -3,7 +3,7 @@ import { requirePermission } from "@/lib/auth/session";
 import { prisma } from "@/lib/db/prisma";
 import { journalService } from "@/lib/services/content.service";
 import { JournalForm } from "@/components/admin/JournalForm";
-import { updateJournalAction } from "@/lib/actions/admin.actions";
+import { updateJournalAction } from "@/lib/actions/journal.actions";
 
 interface PageProps {
   params: Promise<{ id: string }>;

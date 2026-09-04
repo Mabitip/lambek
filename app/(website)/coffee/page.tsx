@@ -27,8 +27,8 @@ import { OptimizedImage } from "@/components/ui/OptimizedImage";
 import { SITE_IMAGES } from "@/lib/constants/images";
 
 export const metadata = buildMetadata({
-  title: "Coffee | Where Tradition Meets Aroma",
-  description: `Where Tradition Meets Aroma. Explore ${BRAND.name}'s selection of Ethiopian Yirgacheffe green coffee — single-farm lots, washed and natural micro-lots.`,
+  title: "Coffee | Where Traditions Meet Aroma",
+  description: `Where Traditions Meet Aroma. Explore ${BRAND.name}'s selection of Ethiopian Yirgacheffe green coffee — single-farm lots, washed and natural micro-lots.`,
   path: "/coffee",
 });
 
@@ -167,7 +167,7 @@ export default async function CoffeePage({ searchParams }: PageProps) {
           <div className="inline-flex items-center gap-2.5 rounded-full border border-secondary/40 bg-black/50 px-5 py-2 backdrop-blur-md">
             <Sparkles className="h-4 w-4 text-secondary" />
             <span className="text-xs font-semibold uppercase tracking-[0.25em] text-secondary">
-              Where Tradition Meets Aroma
+              Where Traditions Meet Aroma
             </span>
           </div>
 

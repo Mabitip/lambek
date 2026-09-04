@@ -89,15 +89,19 @@ export const settingsService = {
   async getHeroContent() {
     try {
       const settings = await settingsRepository.getAll();
+      const headline =
+        settings.hero_headline && settings.hero_headline !== "FROM THE HIGHLANDS\nOF YIRGACHEFFE"
+          ? settings.hero_headline
+          : "WHERE TRADITIONS\nMEET AROMA";
       return {
-        headline: settings.hero_headline ?? "FROM THE HIGHLANDS\nOF YIRGACHEFFE",
+        headline,
         subtext:
           settings.hero_subtext ??
           "Exceptional Ethiopian coffee, carefully processed and prepared for the world.",
       };
     } catch {
       return {
-        headline: "FROM THE HIGHLANDS\nOF YIRGACHEFFE",
+        headline: "WHERE TRADITIONS\nMEET AROMA",
         subtext:
           "Exceptional Ethiopian coffee, carefully processed and prepared for the world.",
       };
