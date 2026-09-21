@@ -31,7 +31,7 @@ export const metadata = buildMetadata({
 
 const HOME_STATS = [
   { value: "YIRGACHEFFE", label: "Celebrated Origin", sub: "Gedeo Zone, Ethiopia", icon: Mountain },
-  { value: "2,000–2,200m", label: "Elevation", sub: "Dense highland beans", icon: Layers },
+  { value: "1,800–2,300m", label: "Elevation", sub: "Dense highland beans", icon: Layers },
   { value: "100% TRACEABLE", label: "Single-Farm Lots", sub: "Direct producer link", icon: ShieldCheck },
   { value: "GRADE 1 & 2", label: "Export Standard", sub: "Optical & sensory QC", icon: Award },
 ];
@@ -46,7 +46,7 @@ const FEATURES = [
   {
     icon: Droplets,
     title: "Artisanal Processing",
-    desc: "Double-density flotation, eco-pulping, and 3-week raised-bed sun drying tailored to preserve delicate florals.",
+    desc: "Double-density flotation, eco-pulping, and slow sun drying on raised beds tailored to preserve delicate florals.",
     tag: "Processing",
   },
   {
@@ -111,8 +111,8 @@ export default async function HomePage() {
             <div className="relative mx-auto max-w-md lg:max-w-none">
               <ImageFrame size="lg" aspect="aspect-[4/5]" hover className="shadow-2xl">
                 <OptimizedImage
-                  src={SITE_IMAGES.origin}
-                  alt="Gedeo highlands landscape"
+                  src={SITE_IMAGES.nursery}
+                  alt="Coffee seedling nursery in the Gedeo highlands"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
@@ -154,14 +154,14 @@ export default async function HomePage() {
                   <span className="block text-xs font-bold uppercase tracking-[0.25em] text-secondary">
                     Heritage & Terroir
                   </span>
-                  <span className="text-[11px] text-foreground/60">Gedeo Zone · Ethiopia</span>
+                  <span className="text-[11px] text-foreground/60">Ethiopian Highlands · Ethiopia</span>
                 </div>
               </div>
 
               <SectionHeading
                 eyebrow="Origin Matters"
                 title="Born in the Cradle of Specialty Arabica"
-                description="The Gedeo highlands combine high elevation, rich red volcanic soil, and indigenous shade canopies to create unmatched flavor complexity."
+                description="The Ethiopian Highlands combine high elevation, rich red volcanic soil, and indigenous shade canopies to create unmatched flavor complexity."
               />
 
               <p className="mt-6 text-base leading-relaxed text-foreground/80 sm:text-lg">
@@ -171,7 +171,7 @@ export default async function HomePage() {
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
                 <div className="rounded-xl border border-border/80 bg-card p-4">
                   <p className="text-xs font-semibold uppercase tracking-wider text-secondary">Altitude</p>
-                  <p className="mt-1 font-serif text-lg font-bold text-primary">2,000 to 2,200 MASL</p>
+                  <p className="mt-1 font-serif text-lg font-bold text-primary">1,800 to 2,300 MASL</p>
                   <p className="mt-1 text-xs text-foreground/60">Enables dense bean cell structure</p>
                 </div>
                 <div className="rounded-xl border border-border/80 bg-card p-4">
@@ -297,7 +297,7 @@ export default async function HomePage() {
           <SectionHeading
             eyebrow="Craft Profiles"
             title="The Art of Washed & Natural Processing"
-            description="Two distinct processing expressions crafted from the same high-altitude Gedeo terroir."
+            description="Two distinct processing expressions crafted from the same high-altitude Ethiopian terroir."
             align="center"
           />
 
@@ -319,17 +319,17 @@ export default async function HomePage() {
                   </span>
                 </div>
                 <div className="absolute bottom-4 left-4 right-4">
-                  <p className="text-xs font-semibold uppercase tracking-widest text-secondary">Mountain Spring Water · Fermentation</p>
+                  <p className="text-xs font-semibold uppercase tracking-widest text-secondary">Water · Fermentation</p>
                 </div>
               </div>
               <div className="p-8">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-semibold uppercase tracking-wider text-primary">Wet Processing</span>
-                  <span className="text-xs text-foreground/50">12–15 Days Raised Beds</span>
+                  <span className="text-xs text-foreground/50">Raised Bed Drying</span>
                 </div>
                 <h3 className="mt-4 font-serif text-2xl font-semibold text-primary">Floral, Citrus & Tea-Like Elegance</h3>
                 <p className="mt-3 text-sm leading-relaxed text-foreground/70">
-                  Pulping with pure mountain spring water followed by controlled wet fermentation yields pristine cup clarity, jasmine florals, bergamot, and delicate lemon acidity.
+                  Pulping followed by controlled mucilage removal followed by water washing yields pristine cup clarity, jasmine florals, bergamot, and delicate lemon acidity.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
                   {["Jasmine", "Bergamot", "Peach", "Black Tea", "Sparkling Acidity"].map((note) => (
@@ -345,8 +345,8 @@ export default async function HomePage() {
             <div className="group overflow-hidden rounded-3xl border border-border bg-card shadow-sm transition duration-300 hover:shadow-xl">
               <div className="relative aspect-[16/10] overflow-hidden">
                 <OptimizedImage
-                  src={SITE_IMAGES.drying}
-                  alt="Elevated African coffee drying beds under Ethiopian sunshine"
+                  src={SITE_IMAGES.cherriesDryingBeds}
+                  alt="Ripe coffee cherries sun-drying on African raised beds"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -364,7 +364,7 @@ export default async function HomePage() {
               <div className="p-8">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-semibold uppercase tracking-wider text-secondary">Natural Sun Drying</span>
-                  <span className="text-xs text-foreground/50">21–25 Days Sun-Drying</span>
+                  <span className="text-xs text-foreground/50">Slow Sun-Drying</span>
                 </div>
                 <h3 className="mt-4 font-serif text-2xl font-semibold text-primary">Wild Blueberry, Honey & Sweet Stonefruit</h3>
                 <p className="mt-3 text-sm leading-relaxed text-foreground/70">

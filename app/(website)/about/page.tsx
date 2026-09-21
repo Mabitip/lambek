@@ -28,17 +28,17 @@ export const metadata = buildMetadata({
   path: "/about",
 });
 
-const DEFAULT_ABOUT = `Lambek Coffee Ltd is a specialty coffee processor and exporter dedicated exclusively to the finest green coffees from the Yirgacheffe and Gedeo highlands of Ethiopia. Headquartered in Addis Ababa with direct washing and drying facilities across Gedeo, Lambek Coffee connects smallholder farming families directly with discerning specialty roasteries around the world. Our operations are rooted in radical lot traceability, strict cherry selection, pure spring water processing, and close producer partnerships.
+const DEFAULT_ABOUT = `Lambek Coffee Ltd is a specialty coffee processor and exporter dedicated exclusively to the finest green coffees from the Ethiopian Highlands. Headquartered in Addis Ababa with direct washing and drying facilities across the highlands, Lambek Coffee connects smallholder farming families directly with discerning specialty roasteries around the world. Our operations are rooted in radical lot traceability, strict cherry selection, and close producer partnerships.
 
-Lambek Coffee is managed by experienced leaders with over a decade of high-end specialty coffee stewardship, including former senior leadership within the Yirgacheffe Coffee Farmers Cooperative Union (YCFCU). This deep origin connection allows Lambek Coffee to cultivate direct relationships with growers, paying quality premiums and offering traceable single-farm and micro-station lots.
+Lambek Coffee is managed by experienced leaders with over 18 years of high-end specialty coffee stewardship, including former senior leadership within the Yirgacheffe Coffee Farmers Cooperative Union (YCFCU). This deep origin connection allows Lambek Coffee to cultivate direct relationships with growers, paying quality premiums and offering traceable single-farm and micro-station lots.
 
-We manage a meticulously controlled value chain: from selective hand-picking of deep crimson cherries and wet-mill processing to elevated African raised-bed sun drying, professional dry-milling, optical color grading in Addis Ababa, and hermetic export packaging in GrainPro liners.
+We manage a meticulously controlled value chain: from selective hand-picking of deep crimson cherries and wet-mill processing to elevated African raised-bed slow sun drying, professional dry-milling, optical color grading in Addis Ababa, and hermetic export packaging in Ecotact liners.
 
 Our core offerings include Yirgacheffe Grade 1 Fully Washed (celebrated for jasmine florals, bergamot, and sparkling citrus clarity), Yirgacheffe Grade 1 Special Natural (intense wild blueberries, raw honey, and sweet stonefruit), Single-Farm Micro-lots, and custom prepared export lots tailored for specialty importers and roasters globally.`;
 
 const KEY_STATS = [
   {
-    value: "2,000–2,200m",
+    value: "1,800–2,300m",
     label: "Highland Elevation",
     subtext: "Slow cherry maturation & dense bean structure",
     icon: Mountain,
@@ -56,9 +56,9 @@ const KEY_STATS = [
     icon: Award,
   },
   {
-    value: "12+ Years",
+    value: "18+ Years",
     label: "Origin Leadership",
-    subtext: "Direct partnership with Gedeo farming families",
+    subtext: "Direct partnership with Ethiopian farming families",
     icon: HeartHandshake,
   },
 ];
@@ -67,7 +67,7 @@ const PILLARS = [
   {
     icon: Mountain,
     title: "Highland Microclimates",
-    desc: "Grown at 2,000 to 2,200 meters in fertile volcanic soil beneath native shade canopies, developing high density and complex acidity.",
+    desc: "Grown at 1,800 to 2,300 meters in fertile volcanic soil beneath native shade canopies, developing high density and complex acidity.",
     badge: "Terroir",
   },
   {
@@ -79,13 +79,13 @@ const PILLARS = [
   {
     icon: Droplets,
     title: "Artisanal Processing",
-    desc: "From strict flotation and density separation to 3-week raised-bed sun drying, every step is calibrated for cup clarity.",
+    desc: "From strict flotation and density separation to slow sun drying on raised beds, every step is calibrated for cup clarity.",
     badge: "Craft",
   },
   {
     icon: ShieldCheck,
     title: "Export Precision",
-    desc: "Processed in our modern Addis Ababa dry mill with color sorters, gravity tables, and certified Q-grader cupping labs.",
+    desc: "Processed in our modern Addis Ababa dry mill with color sorters, gravity tables, and certified cupping labs.",
     badge: "Quality Control",
   },
 ];
@@ -99,12 +99,12 @@ const PROCESS_STEPS = [
   {
     step: "02",
     title: "Flotation & Density Grading",
-    desc: "Cherries enter spring water tanks where less-dense floaters are skimmed away to ensure uniform seed density.",
+    desc: "Cherries enter water tanks where less-dense floaters are skimmed away to ensure uniform seed density.",
   },
   {
     step: "03",
     title: "Raised-Bed Sun Drying",
-    desc: "Cherries/parchment rest on elevated African beds, turned hourly under strict layer depth to reach 10–12% moisture.",
+    desc: "Cherries/parchment rest on elevated African beds, regularly racked under strict layer depth to reach 10–12% moisture.",
   },
   {
     step: "04",
@@ -114,7 +114,7 @@ const PROCESS_STEPS = [
   {
     step: "05",
     title: "Dry Milling & Export Lab",
-    desc: "Hulled, gravity-separated, optical color-sorted, and cupped in Addis Ababa before export packing in GrainPro liners.",
+    desc: "Hulled, gravity-separated, optical color-sorted, and cupped in Addis Ababa before export packing in Ecotact liners.",
   },
 ];
 
@@ -207,7 +207,7 @@ export default async function AboutPage() {
 
                 <SectionHeading
                   eyebrow={`About ${BRAND.wordmark}`}
-                  title="From the Gedeo Highlands to the World"
+                  title="From the Ethiopian Highlands to the World"
                 />
 
                 <div className="mt-8 space-y-6 text-base leading-relaxed text-foreground/80 sm:text-lg">
@@ -241,7 +241,7 @@ export default async function AboutPage() {
                 <ImageFrame size="lg" aspect="aspect-[4/5]" hover className="shadow-2xl">
                   <OptimizedImage
                     src={SITE_IMAGES.farm}
-                    alt="Coffee farm in the Gedeo zone"
+                    alt="Coffee seedling nursery under shade cloth in Ethiopian highlands"
                     fill
                     sizes="(max-width: 1024px) 100vw, 40vw"
                   />
@@ -251,8 +251,8 @@ export default async function AboutPage() {
                 <div className="absolute -bottom-8 -left-8 hidden w-3/5 overflow-hidden rounded-2xl border-4 border-card shadow-2xl sm:block">
                   <div className="relative aspect-square">
                     <OptimizedImage
-                      src={SITE_IMAGES.processing}
-                      alt="Ripe coffee cherries"
+                      src={SITE_IMAGES.seedlings}
+                      alt="Young coffee seedlings in nursery bags"
                       fill
                       sizes="(max-width: 1024px) 50vw, 25vw"
                     />
@@ -333,8 +333,8 @@ export default async function AboutPage() {
             <div className="group overflow-hidden rounded-3xl border border-border bg-card shadow-sm transition hover:shadow-xl">
               <div className="relative h-64 w-full overflow-hidden">
                 <OptimizedImage
-                  src={SITE_IMAGES.quality}
-                  alt="Fully Washed green coffee"
+                  src={SITE_IMAGES.parchmentDrying}
+                  alt="Fully Washed parchment coffee drying on raised beds"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="transition duration-700 group-hover:scale-105"
@@ -345,7 +345,7 @@ export default async function AboutPage() {
                     Wet-Mill Process
                   </span>
                   <span className="rounded-full border border-white/20 bg-black/40 px-3 py-1 text-xs text-white backdrop-blur-md">
-                    12–15 Days Drying
+                    Raised Bed Drying
                   </span>
                 </div>
               </div>
@@ -356,7 +356,7 @@ export default async function AboutPage() {
                   Sensory Profile: Jasmine · Bergamot · Peach · Black Tea · Sparkling Lemon Acidity
                 </p>
                 <p className="mt-4 text-sm leading-relaxed text-foreground/80">
-                  Selective cherry flotation separates less-dense fruit before mechanical depulping. Parchment undergoes controlled underwater fermentation followed by clean river washing and slow drying on ventilated raised beds.
+                  Selective cherry flotation separates less-dense fruit before mechanical depulping. Parchment undergoes controlled mucilage removal followed by water washing and slow drying on ventilated raised beds.
                 </p>
 
                 <ul className="mt-6 space-y-2.5 border-t border-border pt-6 text-sm text-foreground/80">
@@ -370,7 +370,7 @@ export default async function AboutPage() {
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-secondary" />
-                    <span>Constant parchment rotation to 10.5% moisture</span>
+                    <span>Constant parchment rotation to 11.5% moisture</span>
                   </li>
                 </ul>
               </div>
@@ -380,8 +380,8 @@ export default async function AboutPage() {
             <div className="group overflow-hidden rounded-3xl border border-border bg-card shadow-sm transition hover:shadow-xl">
               <div className="relative h-64 w-full overflow-hidden">
                 <OptimizedImage
-                  src={SITE_IMAGES.drying}
-                  alt="Natural coffee drying on beds"
+                  src={SITE_IMAGES.cherriesDryingBeds}
+                  alt="Natural coffee cherries drying on raised beds"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="transition duration-700 group-hover:scale-105"
@@ -392,7 +392,7 @@ export default async function AboutPage() {
                     Special Natural Process
                   </span>
                   <span className="rounded-full border border-white/20 bg-black/40 px-3 py-1 text-xs text-white backdrop-blur-md">
-                    21–25 Days Drying
+                    Slow Sun Drying
                   </span>
                 </div>
               </div>
@@ -403,7 +403,7 @@ export default async function AboutPage() {
                   Sensory Profile: Wild Blueberry · Ripe Strawberry · Raw Honey · Milk Chocolate · Creamy Body
                 </p>
                 <p className="mt-4 text-sm leading-relaxed text-foreground/80">
-                  Whole ripe cherries are spread in thin single layers on elevated mesh beds. Hand-raked hourly under mountain sun and covered during peak midday heat to ensure gentle, uniform dehydration.
+                  Whole ripe cherries are spread in thin single layers on elevated mesh beds. Regularly racked under mountain sun and covered during peak midday heat to ensure gentle, uniform dehydration.
                 </p>
 
                 <ul className="mt-6 space-y-2.5 border-t border-border pt-6 text-sm text-foreground/80">
@@ -413,7 +413,7 @@ export default async function AboutPage() {
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-secondary" />
-                    <span>Hourly hand-turning during daylight</span>
+                    <span>Regular racking for even drying</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-secondary" />
@@ -431,7 +431,7 @@ export default async function AboutPage() {
         <div className="mx-auto max-w-7xl">
           <SectionHeading
             eyebrow="Lifecycle"
-            title="The Journey: From Gedeo Soil to Global Port"
+            title="The Journey: From Ethiopian Soil to Global Port"
             description="A strictly documented 5-stage value chain ensuring zero quality degradation."
             align="center"
           />

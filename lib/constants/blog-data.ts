@@ -21,7 +21,7 @@ export const SAMPLE_BLOG_POSTS: SampleBlogPost[] = [
     title: "The Journey of Ethiopian Coffee: From Cherry to Green Bean",
     slug: "journey-of-ethiopian-coffee-from-cherry-to-green-bean",
     excerpt:
-      "Follow the intricate transformation of specialty coffee in the Gedeo highlands — from selective hand-harvesting of crimson cherries to pristine export-ready green beans.",
+      "Follow the intricate transformation of specialty coffee in the Ethiopian Highlands — from selective hand-picking of crimson cherries to pristine export-ready green beans.",
     coverImage: { url: "/images/blog-coffee-journey.jpg" },
     publishedAt: "2025-01-15T09:00:00.000Z",
     readingTime: 5,
@@ -52,7 +52,7 @@ export const SAMPLE_BLOG_POSTS: SampleBlogPost[] = [
         &ldquo;True specialty coffee begins at the tree: only deep crimson cherries picked at peak brix sugar concentration can develop the celebrated floral aromatics of Yirgacheffe.&rdquo;
       </blockquote>
 
-      <h2>Step 1: Selective Hand-Harvesting</h2>
+      <h2>Step 1: Selective Hand-Picking</h2>
       <p>Harvesting in Ethiopia is done entirely by hand. Smallholder farming families navigate steep highland slopes multiple times throughout the harvest season, picking only cherries that have reached deep red maturity while leaving underripe green cherries on the branch for subsequent passes.</p>
 
       <h2>Step 2: Density Flotation & Sorting</h2>
@@ -62,7 +62,7 @@ export const SAMPLE_BLOG_POSTS: SampleBlogPost[] = [
       <p>Whether processed as fully washed parchment or sun-dried natural cherries, the coffee is laid in thin layers on elevated wooden mesh beds. Workers turn the coffee every hour to guarantee even airflow and solar exposure, protecting the beans from rain and intense midday sun with shade netting until moisture reaches a steady 10.5% to 11.5%.</p>
 
       <h2>Step 4: Dry Milling, Optical Grading & Bagging</h2>
-      <p>After resting for 4 to 6 weeks to stabilize water activity, the cured parchment is transported to our modern dry mill in Addis Ababa. Here, mechanical hullers remove the outer husk, followed by multi-stage gravity separation and high-precision optical color sorting to eliminate physical defects before the green beans are hermetically sealed in GrainPro liners.</p>
+      <p>After resting for 4 to 6 weeks to stabilize water activity, the cured parchment is transported to our modern dry mill in Addis Ababa. Here, mechanical hullers remove the outer husk, followed by multi-stage gravity separation and high-precision optical color sorting to eliminate physical defects before the green beans are hermetically sealed in Ecotact liners.</p>
     `,
   },
   {
@@ -97,17 +97,17 @@ export const SAMPLE_BLOG_POSTS: SampleBlogPost[] = [
       <p>Washed (or wet-processed) coffee is prized by specialty roasters for its pristine transparency, vibrant citric acidity, and delicate floral perfumes. Unlike natural processing where the fruit dries intact, washed processing strips away the fruit flesh before drying, allowing the pure seed terroir to shine through unmasked.</p>
 
       <h2>Pulping with Mountain Spring Water</h2>
-      <p>At our Gedeo washing stations, freshly picked ripe cherries are fed through mechanical disk pulpers driven by gravity and clean mountain spring water. The outer skin and pulp are gently removed, leaving the seed enveloped in its sticky mucilage layer.</p>
+      <p>At our Gedeo washing stations, freshly picked ripe cherries are fed through mechanical disk pulpers. The outer skin and pulp are gently removed, leaving the seed enveloped in its sticky mucilage layer.</p>
 
       <blockquote>
         &ldquo;The fermentation stage is critical: too short and mucilage clings to the parchment; too long and delicate floral esters degrade into harsh vinegary notes.&rdquo;
       </blockquote>
 
-      <h2>Controlled Underwater Fermentation</h2>
-      <p>The pulped parchment rests in clean concrete tanks for 36 to 48 hours. Natural enzymes and ambient microflora break down the pectin-rich mucilage. Our station managers continually monitor ambient temperature and pH levels to ensure complete mucilage breakdown without spontaneous over-fermentation.</p>
+      <h2>Controlled Mucilage Removal</h2>
+      <p>The pulped parchment undergoes controlled mucilage removal followed by water washing. Our station managers continually monitor ambient temperature and pH levels to ensure complete mucilage breakdown without spontaneous over-fermentation.</p>
 
       <h2>Channel Washing & Density Separation</h2>
-      <p>Once fermentation is complete, the coffee is pushed along long, serpentine concrete washing channels against flowing clean spring water. Dense, Grade 1 beans settle into the upper channel sections, while lighter seeds travel further downstream. This physical grading is the secret behind the consistency of Ethiopian Grade 1 washed green coffee.</p>
+      <p>Once the mucilage removal is complete, the coffee is pushed along long, serpentine concrete washing channels against flowing clean water. Dense, Grade 1 beans settle into the upper channel sections, while lighter seeds travel further downstream. This physical grading is the secret behind the consistency of Ethiopian Grade 1 washed green coffee.</p>
     `,
   },
   {
@@ -153,7 +153,7 @@ export const SAMPLE_BLOG_POSTS: SampleBlogPost[] = [
   },
   {
     id: "post-4",
-    title: "The Tradition Behind Ethiopian Coffee: Heritage, Terroir & Hand-Harvesting",
+    title: "The Tradition Behind Ethiopian Coffee: Heritage, Terroir & Hand-Picking",
     slug: "tradition-behind-ethiopian-coffee-heritage-terroir",
     excerpt:
       "Where traditions meet aroma — how centuries of Ethiopian cultural heritage shape the dedication and care invested into every bag of green coffee.",

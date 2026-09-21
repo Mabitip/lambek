@@ -173,7 +173,7 @@ export default async function CoffeePage({ searchParams }: PageProps) {
 
           <h1 className="mt-6 font-serif text-4xl font-semibold leading-tight text-white sm:text-5xl md:text-7xl">
             Specialty Green Coffee <br />
-            <span className="italic text-secondary">From the Gedeo Highlands</span>
+            <span className="italic text-secondary">From the Ethiopian Highlands</span>
           </h1>
 
           <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-white/85 sm:text-lg">
@@ -462,7 +462,7 @@ export default async function CoffeePage({ searchParams }: PageProps) {
               </div>
               <div className="flex items-center gap-2 text-sm text-secondary">
                 <Phone className="h-4 w-4" />
-                <span className="font-mono">+251 988 22 3344</span>
+                <span className="font-mono">+251911210468</span>
               </div>
             </div>
 

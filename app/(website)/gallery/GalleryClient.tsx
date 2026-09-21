@@ -85,7 +85,7 @@ export function GalleryClient() {
           Authentic Ethiopian Coffee Heritage
         </h3>
         <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-white/80 sm:text-base">
-          Every micro-lot is grown in the Gedeo highlands, hand-harvested by local farming families, and processed with pure spring water on elevated African beds.
+          Every micro-lot is grown in the Ethiopian Highlands, hand-picked by local farming families, and processed on elevated African beds.
         </p>
       </div>
     </div>
