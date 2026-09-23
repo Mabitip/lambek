@@ -129,13 +129,13 @@ export default async function AboutPage() {
       {/* 1. CINEMATIC HERO SECTION */}
       <section className="relative flex min-h-[60vh] items-end justify-center overflow-hidden bg-primary px-6 pb-20 pt-36 text-white md:min-h-[70vh] md:pb-28">
         <OptimizedImage
-          src={SITE_IMAGES.hero}
-          alt="Ethiopian coffee highlands"
+          src={SITE_IMAGES.naturalBeds}
+          alt="Natural process coffee drying on raised beds in Ethiopian highlands"
           fill
           priority
           sizes="100vw"
           variant="hero"
-          className="scale-105 transition-transform duration-1000 ease-out"
+          className="scale-105 object-cover transition-transform duration-1000 ease-out"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/30" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(201,169,97,0.12),transparent_70%)]" />
@@ -380,8 +380,8 @@ export default async function AboutPage() {
             <div className="group overflow-hidden rounded-3xl border border-border bg-card shadow-sm transition hover:shadow-xl">
               <div className="relative h-64 w-full overflow-hidden">
                 <OptimizedImage
-                  src={SITE_IMAGES.cherriesDryingBeds}
-                  alt="Natural coffee cherries drying on raised beds"
+                  src={SITE_IMAGES.naturalDried}
+                  alt="Dried black natural coffee cherries on raised drying beds"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="transition duration-700 group-hover:scale-105"

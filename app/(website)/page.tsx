@@ -306,8 +306,8 @@ export default async function HomePage() {
             <div className="group overflow-hidden rounded-3xl border border-border bg-card shadow-sm transition duration-300 hover:shadow-xl">
               <div className="relative aspect-[16/10] overflow-hidden">
                 <OptimizedImage
-                  src={SITE_IMAGES.washedStation}
-                  alt="Ethiopian washed coffee station with spring water channels"
+                  src={SITE_IMAGES.cuppingSession}
+                  alt="Professional coffee cupping session evaluating Lambek washed coffees"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 1024px) 100vw, 50vw"

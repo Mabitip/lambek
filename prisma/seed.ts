@@ -227,36 +227,40 @@ async function main() {
     });
   }
 
-  const demoCoffee = await prisma.coffee.upsert({
+  const featuredCoffeeData = {
+    name: "Yirgacheffe Washed",
+    shortDescription:
+      "Specialty washed Yirgacheffe green coffee with floral, citrus, and tea-like notes.",
+    description:
+      "Ethiopian Yirgacheffe washed coffee from the Gedeo highlands — bright acidity, floral aroma, and a clean finish.",
+    region: "Yirgacheffe",
+    microRegion: "Gedeo",
+    country: "Ethiopia",
+    harvestPeriod: "Contact for availability",
+    tastingNotes: ["Floral", "Citrus", "Tea-like"],
+    featured: true,
+    published: true,
+    originId: origin.id,
+    processId: washed.id,
+    varietyId: heirloom.id,
+    seoTitle: "Yirgacheffe Washed | Lambek Coffee",
+    seoDescription: "Specialty washed Yirgacheffe green coffee from Lambek Coffee.",
+  };
+
+  const featuredCoffee = await prisma.coffee.upsert({
     where: { slug: "demo-yirgacheffe-washed" },
-    update: {},
+    update: featuredCoffeeData,
     create: {
-      name: "[Demo] Yirgacheffe Washed",
+      ...featuredCoffeeData,
       slug: "demo-yirgacheffe-washed",
-      shortDescription:
-        "Demonstration coffee record — replace with verified product data via admin.",
-      description:
-        "This is a demonstration coffee entry for CMS testing. Admin users should replace this with verified product information.",
-      region: "Yirgacheffe",
-      microRegion: "Gedeo",
-      country: "Ethiopia",
-      harvestPeriod: "Contact for availability",
-      tastingNotes: ["Floral", "Citrus", "Tea-like"],
-      featured: true,
-      published: true,
-      originId: origin.id,
-      processId: washed.id,
-      varietyId: heirloom.id,
-      seoTitle: "[Demo] Yirgacheffe Washed | Lambek Coffee",
-      seoDescription: "Demonstration coffee listing for Lambek Coffee CMS.",
     },
   });
 
   await prisma.coffeeProfile.upsert({
-    where: { coffeeId: demoCoffee.id },
+    where: { coffeeId: featuredCoffee.id },
     update: {},
     create: {
-      coffeeId: demoCoffee.id,
+      coffeeId: featuredCoffee.id,
       body: "Medium",
       acidity: "Bright",
       sweetness: "Delicate",
@@ -267,21 +271,26 @@ async function main() {
 
   await prisma.coffeeAvailability.create({
     data: {
-      coffeeId: demoCoffee.id,
+      coffeeId: featuredCoffee.id,
       status: "AVAILABLE",
-      notes: "Demonstration availability status",
+      notes: "Available — contact for current volumes",
     },
   }).catch(() => undefined);
 
   await prisma.coffeeLot.upsert({
     where: { lotId: "DEMO-2024-001" },
-    update: {},
+    update: {
+      harvest: "Current harvest — contact for details",
+      cupProfile: "Floral, citrus, tea-like — admin editable",
+      notes: "Traceable washed lot from Yirgacheffe / Gedeo.",
+      published: true,
+    },
     create: {
       lotId: "DEMO-2024-001",
-      coffeeId: demoCoffee.id,
-      harvest: "Demo harvest period",
-      cupProfile: "Demonstration cup profile — admin editable",
-      notes: "This is a demonstration lot for traceability testing.",
+      coffeeId: featuredCoffee.id,
+      harvest: "Current harvest — contact for details",
+      cupProfile: "Floral, citrus, tea-like — admin editable",
+      notes: "Traceable washed lot from Yirgacheffe / Gedeo.",
       published: true,
     },
   });
