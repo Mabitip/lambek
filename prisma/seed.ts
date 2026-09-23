@@ -247,14 +247,20 @@ async function main() {
     seoDescription: "Specialty washed Yirgacheffe green coffee from Lambek Coffee.",
   };
 
-  const featuredCoffee = await prisma.coffee.upsert({
-    where: { slug: "demo-yirgacheffe-washed" },
-    update: featuredCoffeeData,
-    create: {
-      ...featuredCoffeeData,
-      slug: "demo-yirgacheffe-washed",
+  const existingFeatured = await prisma.coffee.findFirst({
+    where: {
+      OR: [{ slug: "demo-yirgacheffe-washed" }, { slug: "yirgacheffe-washed" }],
     },
   });
+
+  const featuredCoffee = existingFeatured
+    ? await prisma.coffee.update({
+        where: { id: existingFeatured.id },
+        data: { ...featuredCoffeeData, slug: "yirgacheffe-washed" },
+      })
+    : await prisma.coffee.create({
+        data: { ...featuredCoffeeData, slug: "yirgacheffe-washed" },
+      });
 
   await prisma.coffeeProfile.upsert({
     where: { coffeeId: featuredCoffee.id },
@@ -277,23 +283,36 @@ async function main() {
     },
   }).catch(() => undefined);
 
-  await prisma.coffeeLot.upsert({
-    where: { lotId: "DEMO-2024-001" },
-    update: {
-      harvest: "Current harvest — contact for details",
-      cupProfile: "Floral, citrus, tea-like — admin editable",
-      notes: "Traceable washed lot from Yirgacheffe / Gedeo.",
-      published: true,
-    },
-    create: {
-      lotId: "DEMO-2024-001",
-      coffeeId: featuredCoffee.id,
-      harvest: "Current harvest — contact for details",
-      cupProfile: "Floral, citrus, tea-like — admin editable",
-      notes: "Traceable washed lot from Yirgacheffe / Gedeo.",
-      published: true,
+  const existingLot = await prisma.coffeeLot.findFirst({
+    where: {
+      OR: [{ lotId: "DEMO-2024-001" }, { lotId: "YIR-2024-001" }],
     },
   });
+
+  if (existingLot) {
+    await prisma.coffeeLot.update({
+      where: { id: existingLot.id },
+      data: {
+        lotId: "YIR-2024-001",
+        coffeeId: featuredCoffee.id,
+        harvest: "Current harvest — contact for details",
+        cupProfile: "Floral, citrus, tea-like — admin editable",
+        notes: "Traceable washed lot from Yirgacheffe / Gedeo.",
+        published: true,
+      },
+    });
+  } else {
+    await prisma.coffeeLot.create({
+      data: {
+        lotId: "YIR-2024-001",
+        coffeeId: featuredCoffee.id,
+        harvest: "Current harvest — contact for details",
+        cupProfile: "Floral, citrus, tea-like — admin editable",
+        notes: "Traceable washed lot from Yirgacheffe / Gedeo.",
+        published: true,
+      },
+    });
+  }
 
   const category = await prisma.journalCategory.upsert({
     where: { slug: "origin-stories" },
