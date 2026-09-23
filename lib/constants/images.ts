@@ -29,6 +29,7 @@ export const SITE_IMAGES = {
   cuppingSession: "/images/coffee-cupping-session.jpg",
   cuppingBuyers: "/images/coffee-cupping-buyers.jpg",
   cuppingLab: "/images/coffee-cupping-lab.jpg",
+  teamPartners: "/images/lambek-team-partners.jpg",
   blogJourney: "/images/blog-coffee-journey.jpg",
   blogTradition: "/images/blog-ethiopian-tradition.jpg",
   placeholder: "/images/green-coffee-beans.jpg",
@@ -77,6 +78,13 @@ export const HERO_SLIDES = [
     alt: "International buyers cupping Lambek Coffee samples in the tasting room",
     tag: "Cupping · Global Buyers",
     title: "Taste Of Ethiopian Coffee",
+  },
+  {
+    type: "image" as const,
+    src: SITE_IMAGES.teamPartners,
+    alt: "Lambek Coffee team and international partners gathered at the Lambek showroom",
+    tag: "Partners · Shared Craft",
+    title: "Where Traditions Meet Aroma",
   },
   {
     type: "image" as const,
